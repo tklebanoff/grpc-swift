@@ -5406,7 +5406,7 @@
 		OBJ_997 /* SendingWindowUpdateState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingWindowUpdateState.swift; sourceTree = "<group>"; };
 		OBJ_998 /* HTTP2SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP2SettingsState.swift; sourceTree = "<group>"; };
 		OBJ_999 /* HasFlowControlWindows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasFlowControlWindows.swift; sourceTree = "<group>"; };
-		"SwiftProtobuf::SwiftProtobuf::Product" /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftProtobuf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"SwiftProtobuf::SwiftProtobuf::Product" /* SwiftProtobuf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftProtobuf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SwiftProtobuf::SwiftProtobufPluginLibrary::Product" /* SwiftProtobufPluginLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftProtobufPluginLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"SwiftProtobuf::protoc-gen-swift::Product" /* protoc-gen-swift */ = {isa = PBXFileReference; lastKnownFileType = text; path = "protoc-gen-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		"grpc-swift::CGRPCZlib::Product" /* CGRPCZlib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CGRPCZlib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7440,7 +7440,7 @@
 			path = evp;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -7465,7 +7465,6 @@
 				OBJ_1219 /* CONTRIBUTING.md */,
 				OBJ_1220 /* gRPC-Swift-Plugins.podspec */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_511 /* fipsmodule */ = {
@@ -9690,7 +9689,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_1165 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -13850,7 +13849,7 @@
 					"$(SRCROOT)/Sources/CGRPCZlib/include",
 				);
 				INFOPLIST_FILE = "grpc-swift.xcodeproj/GRPC_Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
@@ -13890,7 +13889,7 @@
 					"$(SRCROOT)/Sources/CGRPCZlib/include",
 				);
 				INFOPLIST_FILE = "grpc-swift.xcodeproj/GRPC_Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "$(inherited)";
@@ -15555,6 +15554,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "grpc-swift.xcodeproj/SwiftProtobuf_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -15566,6 +15566,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = SwiftProtobuf;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
 			};
 			name = Debug;
 		};
@@ -15579,6 +15580,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "grpc-swift.xcodeproj/SwiftProtobuf_Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -15590,6 +15592,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
 				SWIFT_VERSION = 5.0;
 				TARGET_NAME = SwiftProtobuf;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
 			};
 			name = Release;
 		};
