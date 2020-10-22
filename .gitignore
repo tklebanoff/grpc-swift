@@ -2,7 +2,6 @@
 project.xcworkspace
 xcuserdata
 DerivedData/
-.build
 .swiftpm
 build
 /protoc-gen-swift
