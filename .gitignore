@@ -12,7 +12,6 @@ third_party/**
 /EchoNIO
 /test.out
 /echo.pid
-/*.xcodeproj
 /scripts/tmp/
 Examples/EchoWeb/dist
 Examples/EchoWeb/node_modules
