@@ -17,3 +17,6 @@ Examples/EchoWeb/node_modules
 Examples/EchoWeb/package-lock.json
 dev/codegen-tests/**/generated/*
 /scripts/.swiftformat-source/
+**.o
+**.d
+.build/x86_64-apple-macosx/
