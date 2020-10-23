@@ -4,6 +4,7 @@ xcuserdata
 DerivedData/
 .swiftpm
 build
+.build
 /protoc-gen-swift
 /protoc-gen-grpc-swift
 third_party/**

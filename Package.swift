@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 /*
  * Copyright 2017, gRPC Authors All rights reserved.
  *
@@ -13,234 +13,79 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+
  */
 import PackageDescription
 
 let package = Package(
-  name: "grpc-swift",
-  products: [
-    .library(name: "GRPC", targets: ["GRPC"]),
-    .library(name: "CGRPCZlib", targets: ["CGRPCZlib"]),
-    .executable(name: "protoc-gen-grpc-swift", targets: ["protoc-gen-grpc-swift"]),
-  ],
-  dependencies: [
-    // GRPC dependencies:
-    // Main SwiftNIO package
-    .package(url: "https://github.com/apple/swift-nio.git", from: "2.22.0"),
-    // HTTP2 via SwiftNIO
-    .package(url: "https://github.com/apple/swift-nio-http2.git", from: "1.14.1"),
-    // TLS via SwiftNIO
-    .package(url: "https://github.com/apple/swift-nio-ssl.git", from: "2.8.0"),
-    // Support for Network.framework where possible.
-    .package(url: "https://github.com/apple/swift-nio-transport-services.git", from: "1.6.0"),
+    name: "grpc-swift",
+    platforms: [.iOS(.v14)],
+    products: [
+        .library(
+            name: "GRPC", 
+            targets: ["GRPC"]
+            ),
+        .library(name: "CGRPCZlib", targets: ["CGRPCZlib"]),
+        .executable(name: "protoc-gen-grpc-swift", targets: ["protoc-gen-grpc-swift"]),
+    ],
 
-    // Official SwiftProtobuf library, for [de]serializing data to send on the wire.
-    .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.9.0"),
+    dependencies: [
 
-    // Logging API.
-    .package(url: "https://github.com/apple/swift-log.git", from: "1.4.0"),
-  ],
-  targets: [
-    // The main GRPC module.
-    .target(
-      name: "GRPC",
-      dependencies: [
-        "NIO",
-        "NIOFoundationCompat",
-        "NIOTransportServices",
-        "NIOHTTP1",
-        "NIOHTTP2",
-        "NIOSSL",
-        "CGRPCZlib",
-        "SwiftProtobuf",
-        "Logging",
-      ]
-    ), // and its tests.
-    .testTarget(
-      name: "GRPCTests",
-      dependencies: [
-        "GRPC",
-        "EchoModel",
-        "EchoImplementation",
-        "GRPCSampleData",
-        "GRPCInteroperabilityTestsImplementation",
-      ]
-    ),
+        // GRPC dependencies:
+        // Main SwiftNIO package
+        .package(url: "https://github.com/apple/swift-nio.git", from: "2.22.0"),
 
-    .target(
-      name: "CGRPCZlib",
-      linkerSettings: [
-        .linkedLibrary("z"),
-      ]
-    ),
+        // HTTP2 via SwiftNIO
+        .package(url: "https://github.com/apple/swift-nio-http2.git", from: "1.14.1"),
 
-    // The `protoc` plugin.
-    .target(
-      name: "protoc-gen-grpc-swift",
-      dependencies: [
-        "SwiftProtobuf",
-        "SwiftProtobufPluginLibrary",
-        "protoc-gen-swift",
-      ]
-    ),
+        // TLS via SwiftNIO
+        .package(url: "https://github.com/apple/swift-nio-ssl.git", from: "2.8.0"),
 
-    // Interoperability tests implementation.
-    .target(
-      name: "GRPCInteroperabilityTestsImplementation",
-      dependencies: [
-        "GRPC",
-        "GRPCInteroperabilityTestModels",
-      ]
-    ),
+        // Support for Network.framework where possible.
+        .package(url: "https://github.com/apple/swift-nio-transport-services.git", from: "1.6.0"),
 
-    // Generated interoperability test models.
-    .target(
-      name: "GRPCInteroperabilityTestModels",
-      dependencies: [
-        "GRPC",
-        "NIO",
-        "NIOHTTP1",
-        "SwiftProtobuf",
-      ]
-    ),
+        // Official SwiftProtobuf library, for [de]serializing data to send on the wire.
+        .package(name: "SwiftProtobuf", url: "https://github.com/apple/swift-protobuf.git", from: "1.9.0"),
 
-    // The CLI for the interoperability tests.
-    .target(
-      name: "GRPCInteroperabilityTests",
-      dependencies: [
-        "GRPCInteroperabilityTestsImplementation",
-        "Logging",
-      ]
-    ),
+        // Logging API.
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.4.0"),
 
-    // The connection backoff interoperability test.
-    .target(
-      name: "GRPCConnectionBackoffInteropTest",
-      dependencies: [
-        "GRPC",
-        "GRPCInteroperabilityTestModels",
-        "Logging",
-      ]
-    ),
+    ],
+    targets: [
+        // The main GRPC module.
+        .target(
+            name: "GRPC",
+            dependencies: [
+                .product(name: "NIO", package: "swift-nio"),
+                .product(name: "NIOFoundationCompat", package: "swift-nio"),
+                .product(name: "NIOTransportServices", package: "swift-nio-transport-services"),
+                .product(name: "NIOHTTP1", package: "swift-nio"),
+                .product(name: "NIOHTTP2", package: "swift-nio-http2"),
+                .product(name: "NIOSSL", package: "swift-nio-ssl"),
+                .product(name: "Logging", package: "swift-log"),
+                .product(name: "SwiftProtobufPluginLibrary", package: "SwiftProtobuf"),
+                .product(name: "protoc-gen-swift", package: "SwiftProtobuf"),
+                "CGRPCZlib",
+            ]
+            ), 
+        .target(
+            name: "CGRPCZlib",
+            linkerSettings: [
+                .linkedLibrary("z"),
+            ]
+            ),
 
-    // Performance tests implementation and CLI.
-    .target(
-      name: "GRPCPerformanceTests",
-      dependencies: [
-        "GRPC",
-        "EchoModel",
-        "EchoImplementation",
-        "NIO",
-        "NIOSSL",
-      ]
-    ),
+        // The `protoc` plugin.
+        .target(
+            name: "protoc-gen-grpc-swift",
+            dependencies: [
+                "SwiftProtobuf",
+                //"SwiftProtobufPluginLibrary",
+                .product(name: "SwiftProtobufPluginLibrary", package: "SwiftProtobuf"),
+                .product(name: "protoc-gen-swift", package: "SwiftProtobuf"),
+                //"protoc-gen-swift",
+            ]
+            ),
 
-    // Sample data, used in examples and tests.
-    .target(
-      name: "GRPCSampleData",
-      dependencies: ["NIOSSL"]
-    ),
-
-    // Echo example CLI.
-    .target(
-      name: "Echo",
-      dependencies: [
-        "EchoModel",
-        "EchoImplementation",
-        "GRPC",
-        "GRPCSampleData",
-        "SwiftProtobuf",
-      ],
-      path: "Sources/Examples/Echo/Runtime"
-    ),
-
-    // Echo example service implementation.
-    .target(
-      name: "EchoImplementation",
-      dependencies: [
-        "EchoModel",
-        "GRPC",
-        "SwiftProtobuf",
-      ],
-      path: "Sources/Examples/Echo/Implementation"
-    ),
-
-    // Model for Echo example.
-    .target(
-      name: "EchoModel",
-      dependencies: [
-        "GRPC",
-        "NIO",
-        "NIOHTTP1",
-        "SwiftProtobuf",
-      ],
-      path: "Sources/Examples/Echo/Model"
-    ),
-
-    // Model for the HelloWorld example
-    .target(
-      name: "HelloWorldModel",
-      dependencies: [
-        "GRPC",
-        "NIO",
-        "NIOHTTP1",
-        "SwiftProtobuf",
-      ],
-      path: "Sources/Examples/HelloWorld/Model"
-    ),
-
-    // Client for the HelloWorld example
-    .target(
-      name: "HelloWorldClient",
-      dependencies: [
-        "GRPC",
-        "HelloWorldModel",
-      ],
-      path: "Sources/Examples/HelloWorld/Client"
-    ),
-
-    // Server for the HelloWorld example
-    .target(
-      name: "HelloWorldServer",
-      dependencies: [
-        "GRPC",
-        "NIO",
-        "HelloWorldModel",
-      ],
-      path: "Sources/Examples/HelloWorld/Server"
-    ),
-
-    // Model for the RouteGuide example
-    .target(
-      name: "RouteGuideModel",
-      dependencies: [
-        "GRPC",
-        "NIO",
-        "NIOHTTP1",
-        "SwiftProtobuf",
-      ],
-      path: "Sources/Examples/RouteGuide/Model"
-    ),
-
-    // Client for the RouteGuide example
-    .target(
-      name: "RouteGuideClient",
-      dependencies: [
-        "GRPC",
-        "RouteGuideModel",
-      ],
-      path: "Sources/Examples/RouteGuide/Client"
-    ),
-
-    // Server for the RouteGuide example
-    .target(
-      name: "RouteGuideServer",
-      dependencies: [
-        "GRPC",
-        "NIO",
-        "RouteGuideModel",
-      ],
-      path: "Sources/Examples/RouteGuide/Server"
-    ),
-  ]
+    ]
 )
