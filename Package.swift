@@ -25,8 +25,8 @@ let package = Package(
             name: "GRPC", 
             targets: ["GRPC"]
             ),
-        .library(name: "CGRPCZlib", targets: ["CGRPCZlib"]),
-        .executable(name: "protoc-gen-grpc-swift", targets: ["protoc-gen-grpc-swift"]),
+        //.library(name: "CGRPCZlib", targets: ["CGRPCZlib"]),
+        //.executable(name: "protoc-gen-grpc-swift", targets: ["protoc-gen-grpc-swift"]),
     ],
 
     dependencies: [
@@ -64,28 +64,30 @@ let package = Package(
                 .product(name: "NIOSSL", package: "swift-nio-ssl"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "SwiftProtobufPluginLibrary", package: "SwiftProtobuf"),
-                .product(name: "protoc-gen-swift", package: "SwiftProtobuf"),
-                "CGRPCZlib",
+                //.product(name: "protoc-gen-swift", package: "SwiftProtobuf"),
+                //"CGRPCZlib",
             ]
             ), 
+        /*
         .target(
-            name: "CGRPCZlib",
-            linkerSettings: [
-                .linkedLibrary("z"),
-            ]
-            ),
+        name: "CGRPCZlib",
+        linkerSettings: [
+        .linkedLibrary("z"),
+        ]
+        ),
 
         // The `protoc` plugin.
         .target(
-            name: "protoc-gen-grpc-swift",
-            dependencies: [
-                "SwiftProtobuf",
-                //"SwiftProtobufPluginLibrary",
-                .product(name: "SwiftProtobufPluginLibrary", package: "SwiftProtobuf"),
-                .product(name: "protoc-gen-swift", package: "SwiftProtobuf"),
-                //"protoc-gen-swift",
-            ]
-            ),
+        name: "protoc-gen-grpc-swift",
+        dependencies: [
+        "SwiftProtobuf",
+        //"SwiftProtobufPluginLibrary",
+        .product(name: "SwiftProtobufPluginLibrary", package: "SwiftProtobuf"),
+        .product(name: "protoc-gen-swift", package: "SwiftProtobuf"),
+        //"protoc-gen-swift",
+        ]
+        ),
+        */
 
     ]
 )
